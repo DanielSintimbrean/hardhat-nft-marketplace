@@ -89,7 +89,7 @@ contract NftMarketplace {
      * @param tokenId: The TokenID of the NFT
      * @param price: sale prince of the listed NFt
      **/
-    function listItems(
+    function listItem(
         address nftAddress,
         uint256 tokenId,
         uint256 price

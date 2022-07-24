@@ -6,10 +6,10 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
 
-    log("\n======== DEPLOYING NftMarketplace ========\n")
+    log("\n======== DEPLOYING BasicNft ========\n")
 
     const args = []
-    const nftMarketplace = await deploy("NftMarketplace", {
+    const basicNft = await deploy("BasicNft", {
         from: deployer,
         args,
         log: true,
@@ -18,7 +18,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")
-        await verify(nftMarketplace.address, args)
+        await verify(basicNft.address, args)
     }
 
     log("\n=========== Finish Deploying ============\n")
