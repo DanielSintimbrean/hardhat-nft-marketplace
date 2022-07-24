@@ -1,13 +1,7 @@
-node_modules
-artifacts
-cache
-coverage*
-gasReporterOutput.json
-package.json
-img
-.env
-.*
-README.md
-coverage.json
-deployments
-.next
+{
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": false,
+    "printWidth": 99
+}
