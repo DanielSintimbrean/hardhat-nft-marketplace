@@ -24,7 +24,7 @@ const { developmentChains } = require("../../helper-hardhat-config")
           it("List a NFT and buy it", async function () {
               await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
 
-              const listing = await nftMarketplace.getListings(basicNft.address, TOKEN_ID)
+              const listing = await nftMarketplace.getListing(basicNft.address, TOKEN_ID)
 
               assert(listing.price.toString() == PRICE.toString())
               assert(listing.seller.toString() == deployer.toString())
@@ -51,7 +51,7 @@ const { developmentChains } = require("../../helper-hardhat-config")
                   playerConncectedNftMarketPlace.buyItem(basicNft.address, TOKEN_ID, {
                       value: PRICE,
                   })
-              ).to.be.revertedWith(`NftMarketplace__NotListed("${basicNft.address}", ${TOKEN_ID})`)
+              ).to.be.revertedWith(`NotListed("${basicNft.address}", ${TOKEN_ID})`)
 
               const newOwner = await basicNft.ownerOf(TOKEN_ID)
               const deployerProceeds = await nftMarketplace.getProceeds(deployer)
@@ -72,9 +72,7 @@ const { developmentChains } = require("../../helper-hardhat-config")
                   playerConncectedNftMarketPlace.buyItem(basicNft.address, TOKEN_ID, {
                       value: PRICE,
                   })
-              ).to.be.revertedWith(
-                  `NftMarketplace__PriceNotMet("${basicNft.address}", ${TOKEN_ID}, ${PRICE_X2})`
-              )
+              ).to.be.revertedWith(`PriceNotMet("${basicNft.address}", ${TOKEN_ID}, ${PRICE_X2})`)
 
               const newOwner = await basicNft.ownerOf(TOKEN_ID)
               const deployerProceeds = await nftMarketplace.getProceeds(deployer)
