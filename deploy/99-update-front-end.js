@@ -2,12 +2,28 @@ const { ethers, network } = require("hardhat")
 const fs = require("fs")
 
 const frontEndContractsFile = "../moralis/constants/networkMapping.json"
+const frontEndAbiLocations = "../moralis/constants/"
 
 module.exports = async function () {
     if (process.env.UPDATE_FRONT_END) {
         console.log("upada")
         await updateContractAddresses()
+        await updateAbi()
     }
+}
+
+async function updateAbi() {
+    const nftMarketpalce = await ethers.getContract("NftMarketplace")
+    fs.writeFileSync(
+        `${frontEndAbiLocations}NftMarketplace.json`,
+        nftMarketpalce.interface.format(ethers.utils.FormatTypes.json)
+    )
+
+    const basicNft = await ethers.getContract("BasicNft")
+    fs.writeFileSync(
+        `${frontEndAbiLocations}BasicNft.json`,
+        nftMarketpalce.interface.format(ethers.utils.FormatTypes.json)
+    )
 }
 
 async function updateContractAddresses() {
